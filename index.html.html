@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Mengenal Pesawat Sederhana Jenis Tuas</title>
+<style>
+:root{--bg:#eef7f1;--card:#fff;--ink:#17261e;--mut:#55665c;--g:#0f7b45;--g2:#d9f0e3;--ac:#f2b705;--bd:#c5dccd;--tum:#c0392b;--beb:#2d6fd6;--kua:#e67e22;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px);height:100%}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#0e1a13;--card:#16251c;--ink:#e8f3ec;--mut:#9db3a5;--g:#3fc27a;--g2:#1d3a2a;--bd:#2c4a39;--tum:#ef6a5a;--beb:#6ea2ff;--kua:#ffa04d}}
+:root[data-theme="dark"]{--bg:#0e1a13;--card:#16251c;--ink:#e8f3ec;--mut:#9db3a5;--g:#3fc27a;--g2:#1d3a2a;--bd:#2c4a39;--tum:#ef6a5a;--beb:#6ea2ff;--kua:#ffa04d}
+*{box-sizing:border-box}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.55 "Trebuchet MS","Segoe UI",system-ui,sans-serif;min-height:100%;display:flex;flex-direction:column}
+header{background:var(--g);color:#fff;padding:18px 16px 14px;text-align:center}
+header h1{margin:0;font-size:clamp(1.3rem,4.5vw,2rem);letter-spacing:.2px}
+header p{margin:4px 0 0;opacity:.9;font-size:.92rem}
+main{width:100%;max-width:980px;margin:0 auto;padding:14px 14px 24px;flex:1}
+.tabs{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:12px}
+.tab{flex:1 1 220px;border:2px solid var(--g);background:var(--card);color:var(--g);font:inherit;font-weight:700;padding:10px 12px;border-radius:12px;cursor:pointer}
+.tab[aria-selected="true"]{background:var(--g);color:#fff}
+.tab:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible{outline:3px solid var(--ac);outline-offset:2px}
+.panel{background:var(--card);border:1px solid var(--bd);border-radius:16px;padding:14px}
+.panel[hidden]{display:none}
+.panel h2{margin:0 0 4px;font-size:1.15rem;color:var(--g)}
+.hint{color:var(--mut);margin:0 0 10px;font-size:.95rem}
+svg.stage{width:100%;height:auto;display:block;background:linear-gradient(#dff1fb,#f3fbff 70%);border:1px solid var(--bd);border-radius:12px;touch-action:none}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]) svg.stage{background:linear-gradient(#1b3a4d,#27495c 70%)}}
+:root[data-theme="dark"] svg.stage{background:linear-gradient(#1b3a4d,#27495c 70%)}
+svg text{font-family:"Trebuchet MS","Segoe UI",sans-serif;font-weight:700}
+.tok{cursor:grab}
+.tok:active{cursor:grabbing}
+.row{display:flex;gap:8px;flex-wrap:wrap;margin:10px 0}
+.btn{border:2px solid var(--g);background:var(--g2);color:var(--ink);font:inherit;font-weight:700;padding:8px 12px;border-radius:10px;cursor:pointer}
+.btn.pri{background:var(--g);color:#fff}
+.read{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:8px;margin:10px 0}
+.read div{background:var(--g2);border-radius:10px;padding:8px 10px}
+.read b{display:block;font-size:1.15rem}
+.read small{color:var(--mut)}
+.cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));gap:10px;margin-top:10px}
+.card{border:2px solid var(--bd);border-radius:12px;background:var(--card);padding:6px;cursor:pointer;text-align:center;font:inherit;color:var(--ink)}
+.card:hover{border-color:var(--g)}
+.card svg{width:100%;height:auto;background:#eaf6ee;border-radius:8px}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]) .card svg{background:#d5e8dc}}
+:root[data-theme="dark"] .card svg{background:#d5e8dc}
+.card span{display:block;font-weight:700}
+.card small{color:var(--mut)}
+.key{display:flex;gap:12px;flex-wrap:wrap;font-size:.9rem;margin:6px 0}
+.key i{display:inline-block;width:12px;height:12px;border-radius:3px;margin-right:4px;vertical-align:-1px}
+.ctl{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:12px;margin:10px 0}
+.ctl label{font-weight:700;display:block;margin-bottom:4px}
+input[type=range]{width:100%;accent-color:var(--g)}
+select{font:inherit;padding:6px 8px;border-radius:8px;border:2px solid var(--bd);background:var(--card);color:var(--ink)}
+.tw{overflow-x:auto}
+table{border-collapse:collapse;width:100%;min-width:520px}
+th{background:var(--ac);color:#2b2200;padding:6px 8px;font-size:.9rem}
+td{border:1px solid var(--bd);padding:8px;text-align:center;height:40px}
+th,td{border:1px solid var(--bd)}
+.msg{min-height:1.4em;color:var(--tum);font-weight:700;margin:4px 0}
+.info{display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:8px;margin:0 0 12px}.info div{border:2px solid var(--bd);border-left-width:6px;border-radius:10px;padding:8px 10px;font-size:.92rem;background:var(--card)}.info b{display:block;color:var(--g)}svg.vert{max-width:460px;margin:0 auto}footer{text-align:center;padding:14px 12px 18px;border-top:1px solid var(--bd);color:var(--mut);font-size:.92rem}
+footer b{color:var(--ink)}
+</style>
+</head>
+<body>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true"><defs>
+<linearGradient id="gWood" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#d9a566"/><stop offset=".5" stop-color="#b57a3a"/><stop offset="1" stop-color="#7d5124"/></linearGradient>
+<linearGradient id="gStraw" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#d8b04f"/><stop offset="1" stop-color="#f0d47e"/></linearGradient>
+<linearGradient id="gMetal" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#e6ebef"/><stop offset=".5" stop-color="#9aa5ad"/><stop offset="1" stop-color="#6b767e"/></linearGradient>
+<linearGradient id="gSkin" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#f6cf9a"/><stop offset="1" stop-color="#d79e65"/></linearGradient>
+<linearGradient id="gRed" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#e8604f"/><stop offset="1" stop-color="#a3281b"/></linearGradient>
+<linearGradient id="gBlue" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#5f98f0"/><stop offset="1" stop-color="#1f4fa6"/></linearGradient>
+<linearGradient id="gGreen" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#3fae6b"/><stop offset="1" stop-color="#17703f"/></linearGradient>
+</defs></svg>
+
+<header>
+<h1>Mengenal Pesawat Sederhana Jenis Tuas</h1>
+<p>Simulasi digital IPA Kelas VIII</p>
+</header>
+
+<main>
+<div class="tabs" role="tablist">
+<button class="tab" role="tab" id="t1" aria-selected="true" aria-controls="p1">Mengeksplorasi Jenis Tuas</button>
+<button class="tab" role="tab" id="t3" aria-selected="false" aria-controls="p3">Percobaan Mengubah Lengan Kuasa</button>
+</div>
+
+<section class="panel" id="p1" role="tabpanel" aria-labelledby="t1">
+<h2>Mengeksplorasi jenis-jenis tuas</h2>
+<p class="hint">Seret ikon titik tumpu, beban, dan kuasa pada batang tuas. Amati susunannya, lalu catat hasilnya pada tabel di LKM.</p>
+<div class="info"><div style="border-left-color:var(--tum)"><b>Titik tumpu</b>Titik tetap tempat tuas bertumpu atau berputar.</div><div style="border-left-color:var(--beb)"><b>Beban</b>Benda yang diangkat atau dipindahkan. Gayanya berupa berat benda (W).</div><div style="border-left-color:var(--kua)"><b>Kuasa</b>Gaya yang kita berikan pada tuas untuk menggerakkan beban (F).</div><div><b>Lengan beban (LB)</b>Jarak dari titik tumpu ke titik beban.</div><div><b>Lengan kuasa (LK)</b>Jarak dari titik tumpu ke titik kuasa.</div></div>
+<div class="key"><span><i style="background:var(--tum)"></i>Titik tumpu</span><span><i style="background:var(--beb)"></i>Beban</span><span><i style="background:var(--kua)"></i>Kuasa</span></div>
+<svg class="stage" id="s1" viewBox="0 0 800 240" role="img" aria-label="Batang tuas dengan titik tumpu, beban, dan kuasa yang dapat digeser">
+<rect x="50" y="105" width="700" height="18" rx="5" fill="url(#gWood)" stroke="#5e3b17"/>
+<g stroke="#5e3b17" stroke-width="1.5" opacity=".6"><path d="M120 105v8M190 105v8M260 105v8M330 105v8M400 105v8M470 105v8M540 105v8M610 105v8M680 105v8"/></g>
+<g class="tok" id="tk-t"><polygon points="0,123 -26,170 26,170" fill="url(#gRed)" stroke="#7a1a10" stroke-width="2"/><rect x="-34" y="170" width="68" height="8" rx="3" fill="#6b767e"/><text y="196" text-anchor="middle" fill="var(--tum)" font-size="15">Titik Tumpu</text></g>
+<g class="tok" id="tk-b"><rect x="-24" y="62" width="48" height="43" rx="5" fill="url(#gBlue)" stroke="#173b82" stroke-width="2"/><path d="M-24 76h48M0 62v43" stroke="#173b82" stroke-width="2" opacity=".6"/><text y="52" text-anchor="middle" fill="var(--beb)" font-size="15">Beban</text></g>
+<g class="tok" id="tk-k"><polygon points="0,128 -18,158 -7,158 -7,208 7,208 7,158 18,158" fill="#e67e22" stroke="#9a4d0a" stroke-width="2" stroke-linejoin="round"/><text y="228" text-anchor="middle" fill="var(--kua)" font-size="15">Kuasa</text></g>
+</svg>
+<div class="read" aria-live="polite">
+<div><small>Urutan dari kiri</small><b id="r-ord">-</b></div>
+<div><small>Komponen di tengah</small><b id="r-mid">-</b></div>
+<div><small>Jenis tuas</small><b id="r-jen">-</b></div>
+</div>
+<p class="hint">Contoh alat sehari-hari. Pilih salah satu untuk melihat susunan tuasnya.</p>
+<div class="cards">
+<button class="card" data-pre="I"><svg viewBox="0 0 200 120" aria-hidden="true"><g transform="rotate(-7 100 62)"><rect x="12" y="56" width="176" height="9" rx="3" fill="url(#gWood)" stroke="#5e3b17"/><circle cx="30" cy="30" r="9" fill="url(#gSkin)"/><rect x="22" y="40" width="16" height="16" rx="4" fill="#2d6fd6"/><circle cx="172" cy="40" r="9" fill="url(#gSkin)"/><rect x="164" y="50" width="16" height="8" rx="3" fill="#c0392b"/></g><polygon points="100,66 84,108 116,108" fill="url(#gMetal)" stroke="#555"/><circle cx="100" cy="64" r="3" fill="#c0392b"/><circle cx="104" cy="104" r="0"/></svg><span>Jungkat-jungkit</span><small>Titik tumpu di tengah</small></button>
+<button class="card" data-pre="II"><svg viewBox="0 0 200 120" aria-hidden="true"><path d="M70 40L150 34L136 76L84 76Z" fill="url(#gGreen)" stroke="#0e4a29" stroke-width="2"/><path d="M76 46L144 41" stroke="#8fe0b0" stroke-width="3" opacity=".7"/><ellipse cx="112" cy="36" rx="22" ry="9" fill="#8b6b3d"/><path d="M84 76L60 98M136 76L150 98" stroke="#555" stroke-width="4"/><path d="M136 70L192 52M138 76L194 58" stroke="url(#gWood)" stroke-width="5" stroke-linecap="round"/><circle cx="54" cy="92" r="17" fill="#222"/><circle cx="54" cy="92" r="8" fill="#9aa5ad"/><circle cx="54" cy="92" r="2.5" fill="#c0392b"/><path d="M40 106H170" stroke="#9aa" stroke-width="2"/></svg><span>Gerobak dorong</span><small>Beban di tengah</small></button>
+<button class="card" data-pre="III"><svg viewBox="0 0 200 120" aria-hidden="true"><rect x="8" y="53" width="150" height="8" rx="4" fill="url(#gWood)" stroke="#5e3b17"/><rect x="155" y="48" width="7" height="18" fill="#6b4a1e"/><polygon points="162,50 162,64 196,92 196,22" fill="url(#gStraw)" stroke="#9a7222"/><path d="M164 52L196 30M164 55L196 52M164 58L196 70M164 62L196 88" stroke="#9a7222" stroke-width="1.5"/><circle cx="22" cy="57" r="9" fill="url(#gSkin)" stroke="#b57d4b"/><circle cx="82" cy="57" r="9" fill="url(#gSkin)" stroke="#b57d4b"/></svg><span>Sapu</span><small>Kuasa di tengah</small></button>
+<button class="card" data-pre="III"><svg viewBox="0 0 200 120" aria-hidden="true"><rect x="22" y="53" width="132" height="8" rx="4" fill="url(#gWood)" stroke="#5e3b17"/><ellipse cx="18" cy="57" rx="9" ry="13" fill="none" stroke="#6b4a1e" stroke-width="5"/><path d="M154 48L168 44L192 42Q200 57 192 72L168 70L154 66Z" fill="url(#gMetal)" stroke="#555"/><ellipse cx="174" cy="40" rx="11" ry="5" fill="#7a8f2a"/><ellipse cx="188" cy="37" rx="8" ry="4" fill="#a0522d"/><circle cx="34" cy="57" r="9" fill="url(#gSkin)" stroke="#b57d4b"/><circle cx="92" cy="57" r="9" fill="url(#gSkin)" stroke="#b57d4b"/></svg><span>Sekop</span><small>Kuasa di tengah</small></button>
+</div>
+</section>
+
+<section class="panel" id="p3" role="tabpanel" aria-labelledby="t3" hidden>
+<h2>Percobaan mengubah lengan kuasa</h2>
+<p class="hint">Pilih alat kelompokmu. Panjang lengan beban (LB) tetap 80 cm dan berat beban tetap 30 N. Geser pengatur untuk mengubah lengan kuasa (LK), lalu catat hasilnya.</p>
+<div class="ctl">
+<div><label for="alat">Alat yang dipilih</label><select id="alat"><option value="sapu">Sapu</option><option value="sekop">Sekop</option></select></div>
+<div><label for="lk">Lengan kuasa, LK: <span id="lkv">40</span> cm</label><input type="range" id="lk" min="10" max="75" step="5" value="40"></div>
+</div>
+<svg class="stage vert" id="s3" viewBox="0 0 460 580" role="img" aria-label="Sapu atau sekop sebagai tuas dengan titik tumpu, kuasa, dan beban">
+<g transform="translate(324,32.5) rotate(90) scale(.625)"><g id="sapu"><rect x="40" y="144" width="665" height="12" rx="6" fill="url(#gWood)" stroke="#5e3b17"/><polygon points="702,134 702,166 792,226 792,74" fill="url(#gStraw)" stroke="#9a7222"/><path d="M706 142L790 92M706 147L790 118M706 152L790 150M706 157L790 182M706 162L790 208" stroke="#9a7222" stroke-width="1.6"/><rect x="698" y="130" width="12" height="40" rx="3" fill="#6b4a1e"/></g>
+<g id="sekop" style="display:none"><rect x="40" y="144" width="665" height="12" rx="6" fill="url(#gWood)" stroke="#5e3b17"/><ellipse cx="34" cy="150" rx="15" ry="20" fill="none" stroke="#6b4a1e" stroke-width="7"/><path d="M700 136L722 128L792 124Q812 150 792 176L722 172L700 164Z" fill="url(#gMetal)" stroke="#555" stroke-width="2"/><path d="M706 142L788 134" stroke="#fff" stroke-width="3" opacity=".6"/><ellipse cx="740" cy="120" rx="18" ry="7" fill="#7a8f2a"/><ellipse cx="768" cy="115" rx="14" ry="6" fill="#a0522d"/><ellipse cx="754" cy="108" rx="12" ry="5" fill="#c9a227"/></g>
+</g><g id="dyn"></g>
+</svg>
+<div class="read" aria-live="polite">
+<div><small>Lengan beban (LB)</small><b>80 cm (tetap)</b></div>
+<div><small>Berat beban (W)</small><b>30 N (tetap)</b></div>
+<div><small>Lengan kuasa (LK)</small><b id="o-lk">-</b></div>
+<div><small>Gaya kuasa (F)</small><b id="o-f">-</b></div>
+<div><small>KM = LK : LB</small><b id="o-km">-</b></div>
+</div>
+<div class="row"><button class="btn pri" id="rec">Catat ke tabel</button><button class="btn" id="rst">Ulangi percobaan</button></div>
+<div class="msg" id="msg" aria-live="polite"></div>
+<div class="tw"><table><thead><tr><th>Percobaan ke-</th><th>LB (cm)</th><th>LK (cm)</th><th>Berat Beban W (N)</th><th>Gaya Kuasa F (N)</th><th>KM</th></tr></thead><tbody id="tb"></tbody></table></div>
+<p class="hint">Panjang anak panah hanya ilustrasi dan dibatasi agar muat di layar. Baca nilai gaya pada angka di samping anak panah.</p>
+</section>
+</main>
+
+<footer>Simulasi Digital: Mengenal Pesawat Sederhana Jenis Tuas<br>Disusun oleh <b>Dinda Laura El Islami</b></footer>
+
+<script>
+(function(){
+var $=function(s){return document.querySelector(s)};
+var fmt=function(n){return String(Math.round(n*100)/100).replace(".",",")};
+function show(a){var one=a===1;$("#p1").hidden=!one;$("#p3").hidden=one;$("#t1").setAttribute("aria-selected",one);$("#t3").setAttribute("aria-selected",!one)}
+$("#t1").onclick=function(){show(1)};$("#t3").onclick=function(){show(3)};
+
+/* Aktivitas 1 */
+var S=7,X0=50,GAP=6,moved=false,pos={t:20,b:50,k:80};
+var NM={t:"Titik tumpu",b:"Beban",k:"Kuasa"},JN={t:"I",b:"II",k:"III"};
+var PRE={I:{b:8,t:50,k:92},II:{t:8,b:50,k:92},III:{t:8,k:50,b:92}};
+function d1(){
+  ["t","b","k"].forEach(function(k){$("#tk-"+k).setAttribute("transform","translate("+(X0+pos[k]*S)+",0)")});
+  var o=["t","b","k"].sort(function(a,b){return pos[a]-pos[b]}),m=o[1];
+  var a=moved?[o.map(function(k){return NM[k]}).join(" - "),NM[m],"Tuas jenis "+JN[m]]:["Geser ikon untuk memulai","-","-"];
+  $("#r-ord").textContent=a[0];$("#r-mid").textContent=a[1];$("#r-jen").textContent=a[2];
+}
+document.querySelectorAll("[data-pre]").forEach(function(el){el.onclick=function(){pos=Object.assign({},PRE[el.dataset.pre]);moved=true;d1();if(el.classList.contains("card"))$("#s1").scrollIntoView({block:"nearest",behavior:"smooth"})}});
+var drag=null,svg=$("#s1");
+["t","b","k"].forEach(function(k){$("#tk-"+k).addEventListener("pointerdown",function(e){drag=k;svg.setPointerCapture(e.pointerId);e.preventDefault()})});
+svg.addEventListener("pointermove",function(e){
+  if(!drag)return;
+  var r=svg.getBoundingClientRect(),x=(e.clientX-r.left)/r.width*800,c=Math.max(0,Math.min(100,(x-X0)/S));c=Math.round(c);
+  var ok=["t","b","k"].every(function(o){return o===drag||Math.abs(pos[o]-c)>=GAP});
+  if(ok){pos[drag]=c;moved=true;d1()}
+});
+svg.addEventListener("pointerup",function(){drag=null});
+svg.addEventListener("pointercancel",function(){drag=null});
+d1();
+
+/* Aktivitas 3 */
+var rows=[];
+function arrL(y,len,c){var h=204-len;return '<line x1="204" y1="'+y+'" x2="'+(h+4)+'" y2="'+y+'" stroke="'+c+'" stroke-width="8" stroke-linecap="round"/><polygon points="'+(h-14)+','+y+' '+(h+4)+','+(y-12)+' '+(h+4)+','+(y+12)+'" fill="'+c+'"/>'}
+function arrR(y,len,c){var h=246+len;return '<line x1="246" y1="'+y+'" x2="'+(h-4)+'" y2="'+y+'" stroke="'+c+'" stroke-width="8" stroke-linecap="round"/><polygon points="'+(h+14)+','+y+' '+(h-4)+','+(y-12)+' '+(h-4)+','+(y+12)+'" fill="'+c+'"/>'}
+function hand(y){return '<g transform="translate(230,'+y+')"><rect x="-21" y="-14" width="42" height="28" rx="13" fill="url(#gSkin)" stroke="#a8713f" stroke-width="2"/><ellipse cx="0" cy="-12" rx="12" ry="7" fill="url(#gSkin)" stroke="#a8713f" stroke-width="1.5"/><path d="M-12 -4v10M-4 -4v10M4 -4v10M12 -4v10" stroke="#a8713f" stroke-width="1.5" opacity=".6"/></g>'}
+function dimV(x,y1,y2,t,c){return '<path d="M'+(x-7)+' '+y1+'h14M'+(x-7)+' '+y2+'h14M'+x+' '+y1+'V'+y2+'" stroke="'+c+'" stroke-width="3" fill="none"/><text transform="translate('+(x-10)+','+((y1+y2)/2)+') rotate(-90)" text-anchor="middle" font-size="15" fill="'+c+'">'+t+'</text>'}
+function get(){var lk=+$("#lk").value,w=30;return{lk:lk,w:w,f:w*80/lk,km:lk/80}}
+function d3(){
+  var v=get(),kx=60+v.lk*8,al=$("#alat").value;
+  $("#sapu").style.display=al==="sapu"?"":"none";$("#sekop").style.display=al==="sekop"?"":"none";
+  $("#lkv").textContent=v.lk;
+  var bl=Math.min(110,v.w*1.2),kl=Math.min(110,v.f*1.2);
+  var t1=al==="sapu"?"Tangan atas":"Tangan belakang",t2=al==="sapu"?"Tangan bawah":"Tangan depan",t3=al==="sapu"?"Ujung sapu":"Bilah sekop";
+  var ky=70+v.lk*5;
+  $("#dyn").innerHTML=
+    '<rect x="0" y="532" width="460" height="48" fill="#7a5a3a"/><rect x="0" y="532" width="460" height="6" fill="#5c8a3a"/><ellipse cx="120" cy="548" rx="14" ry="5" fill="#a0522d"/><ellipse cx="330" cy="550" rx="16" ry="5" fill="#c9a227"/><ellipse cx="352" cy="544" rx="12" ry="4" fill="#7a8f2a"/>'+
+    hand(70)+hand(ky)+
+    '<circle cx="230" cy="70" r="5" fill="#c0392b"/><text x="262" y="66" font-size="14" fill="var(--tum)">Titik tumpu</text><text x="262" y="82" font-size="12" fill="var(--mut)">('+t1+')</text>'+
+    arrL(ky,kl,"#e67e22")+'<text x="196" y="'+(ky-34)+'" text-anchor="end" font-size="15" fill="var(--kua)">Kuasa F = '+fmt(v.f)+' N</text><text x="196" y="'+(ky-18)+'" text-anchor="end" font-size="12" fill="var(--mut)">('+t2+')</text>'+
+    arrR(470,bl,"#2d6fd6")+'<text x="256" y="444" font-size="14" fill="var(--beb)">Beban W = '+v.w+' N</text><text x="284" y="496" font-size="12" fill="var(--mut)">('+t3+')</text>'+
+    dimV(440,70,470,"LB = 80 cm (tetap)","#2d6fd6")+dimV(412,70,ky,"LK = "+v.lk+" cm","#e67e22");
+  $("#o-lk").textContent=v.lk+" cm";$("#o-f").textContent=fmt(v.f)+" N";$("#o-km").textContent=fmt(v.km);
+}
+function tbl(){
+  var h="";
+  for(var i=0;i<2;i++){var r=rows[i];h+="<tr><td>"+(i+1)+"</td><td>80</td>"+(r?"<td>"+r.lk+"</td><td>"+r.w+"</td><td>"+fmt(r.f)+"</td><td>"+fmt(r.km)+"</td>":"<td></td><td></td><td></td><td></td>")+"</tr>"}
+  $("#tb").innerHTML=h;
+}
+$("#rec").onclick=function(){
+  var v=get(),m=$("#msg");
+  if(rows.length>=2){m.textContent="Tabel sudah terisi dua percobaan. Tekan Ulangi percobaan untuk mulai lagi.";return}
+  if(rows.some(function(r){return r.lk===v.lk})){m.textContent="Gunakan nilai LK yang berbeda dari percobaan sebelumnya.";return}
+  rows.push(v);m.textContent="";tbl();
+};
+$("#rst").onclick=function(){rows=[];$("#msg").textContent="";tbl()};
+["#alat","#lk"].forEach(function(s){$(s).addEventListener("input",d3)});
+tbl();d3();
+})();
+</script>
+</body>
+</html>
